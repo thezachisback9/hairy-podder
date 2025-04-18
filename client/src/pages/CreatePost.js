@@ -1,39 +1,65 @@
-import React from 'react';
-import './CreatePost.css'
+import React, { useState } from 'react';
+import { supabase } from '../client';
+import './CreatePost.css';
 
 const CreatePost = () => {
+  const [post, setPost] = useState({ name: '', familiar: '', knowledge: '', power: '' });
 
-    const [post, setPost] = useState({title: "", author: "", description: ""})
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setPost((prev) => ({ ...prev, [name]: value }));
+  };
 
-    const handleChange = (event) => {
-        const {name, value} = event.target;
-        setPost( (prev) => {
-            return {
-                ...prev,
-                [name]:value,
-            }
-        })
-    }
+  const createPost = async (event) => {
+    event.preventDefault();
+  
+    console.log("Submitting post:", post);
+  
+    const { data, error } = await supabase
+      .from('Posts')
+      .insert({
+        name: post.name,
+        familiar: post.familiar,
+        knowledge: Number(post.knowledge),
+        power: Number(post.power),
+      })
+      .select();
+  
+    console.log("DATA:", data);
+    console.log("ERROR:", error);
+  
+    window.location = "/";
+  };
+  
+  return (
+    <div>
+      <form>
+        <label htmlFor="name">Name</label><br />
+        <input type="text" id="name" name="name" onChange={handleChange} /><br /><br />
 
-    return (
-        <div>
-            <form>
-                <label for="title">Title</label> <br />
-                <input type="text" id="title" name="title" onChange={handleChange} /><br />
-                <br/>
+        <label htmlFor="familiar">Familiar</label><br />
+        <select id="familiar" name="familiar" onChange={handleChange}>
+            <option value="">-- Select Familiar --</option>
+            <option value="Owl">🦉 Owl</option>
+            <option value="Cat">🐱 Cat</option>
+            <option value="Bat">🦇 Bat</option>
+            <option value="Snake">🐍 Snake</option>
+            <option value="Toad">🐸 Toad</option>
+            <option value="Mini Dragon">🐉 Mini Dragon</option>
+    </select>
+    <br />
 
-                <label for="author">Author</label><br />
-                <input type="text" id="author" name="author" onChange={handleChange} /><br />
-                <br/>
 
-                <label for="description">Description</label><br />
-                <textarea rows="5" cols="50" id="description" onChange={handleChange}>
-                </textarea>
-                <br/>
-                <input type="submit" value="Submit" />
-            </form>
-        </div>
-    )
-}
+        <label htmlFor="knowledge">Knowledge</label><br />
+        <input type="number" id="knowledge" name="knowledge" onChange={handleChange} /><br /><br />
 
-export default CreatePost
+        <label htmlFor="power">Power</label><br />
+        <input type="number" id="power" name="power" onChange={handleChange} /><br /><br />
+
+        <input type="submit" value="Create Wizard" onClick={createPost} />
+      </form>
+    </div>
+  );
+};
+
+export default CreatePost;

@@ -1,42 +1,50 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import './EditPost.css'
+import { supabase } from '../client';
 
-const EditPost = ({data}) => {
+const EditPost = () => {
+  const { id } = useParams();
+  const [post, setPost] = useState({ name: '', familiar: '', knowledge: '', power: '' });
 
-    const {id} = useParams();
-    const [post, setPost] = useState({id: null, title: "", author: "", description: ""});
+  useEffect(() => {
+    const fetchPost = async () => {
+      const { data } = await supabase.from('Posts').select().eq('id', id).single();
+      setPost(data);
+    };
+    fetchPost();
+  }, [id]);
 
-    const handleChange = (event) => {
-        const {name, value} = event.target;
-        setPost( (prev) => {
-            return {
-                ...prev,
-                [name]:value,
-            }
-        })
-    }
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setPost((prev) => ({ ...prev, [name]: value }));
+  };
 
-    return (
-        <div>
-            <form>
-                <label for="title">Title</label> <br />
-                <input type="text" id="title" name="title" value={post.title} onChange={handleChange} /><br />
-                <br/>
+  const updatePost = async (event) => {
+    event.preventDefault();
+    await supabase.from('Posts').update(post).eq('id', id);
+    window.location = '/';
+  };
 
-                <label for="author">Author</label><br />
-                <input type="text" id="author" name="author" value={post.author} onChange={handleChange} /><br />
-                <br/>
+  return (
+    <div>
+      <form>
+        <input name="name" value={post.name} onChange={handleChange} placeholder="Name" /><br />
+        <select id="familiar" name="familiar" onChange={handleChange}>
+            <option value="">-- Select Familiar --</option>
+            <option value="Owl">🦉 Owl</option>
+            <option value="Cat">🐱 Cat</option>
+            <option value="Bat">🦇 Bat</option>
+            <option value="Snake">🐍 Snake</option>
+            <option value="Toad">🐸 Toad</option>
+            <option value="Mini Dragon">🐉 Mini Dragon</option>
+        </select>
+<br />
+        <input name="knowledge" type="number" value={post.knowledge} onChange={handleChange} placeholder="Knowledge" /><br />
+        <input name="power" type="number" value={post.power} onChange={handleChange} placeholder="Power" /><br />
+        <button onClick={updatePost}>Update</button>
+      </form>
+    </div>
+  );
+};
 
-                <label for="description">Description</label><br />
-                <textarea rows="5" cols="50" id="description" value={post.description} onChange={handleChange} >
-                </textarea>
-                <br/>
-                <input type="submit" value="Submit" />
-                <button className="deleteButton">Delete</button>
-            </form>
-        </div>
-    )
-}
-
-export default EditPost
+export default EditPost;

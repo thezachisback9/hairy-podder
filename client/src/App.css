@@ -1,18 +1,26 @@
 .App {
-  font-family:Avenir, "Century Gothic", sans-serif;
-  font-weight:100; 
-  font-style:normal;
+  font-family: Avenir, "Century Gothic", sans-serif;
+  font-weight: 100;
+  font-style: normal;
   font-size: calc(10px + 2vmin);
   color: white;
-  justify-content: center;
   background-color: rgba(0, 0, 0, 0.962);
-  padding:20px;
+  padding: 20px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+
+
+  background-image: url('https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F60460d56-7eef-4687-9b38-aa60df61ee1d_640x359.jpeg');
+  background-size: cover;      
+  background-repeat: no-repeat; 
+  background-position: center;  
+  background-attachment: fixed; 
+  min-height: 100vh;             
 }
+
 
 .header{
   width: 100%;
