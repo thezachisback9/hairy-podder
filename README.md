@@ -1,79 +1,13 @@
-# Web Development Project 7 - HAIRY PODDER
+HAIRY PODDER
+This web application allows users to create, view, edit, and delete wizard characters through an interactiv interface. Each wizard has unique attributes and a unique details page. The app uses character management and dynamic routing.
 
-Submitted by: ZACHARY AMANUEL
-
-This web app: WILL MAKE WIZARDS.
-
-Time spent: 6 hours spent in total
-
-## Required Features
-
-The following **required** functionality is completed:
-
-
-- [X] **The web app contains a page that features a create form to add a new crewmate**
-  - Users can name the crewmate
-  - Users can set the crewmate’s attributes by clicking on one of several values
-- [X] **The web app includes a summary page of all the user’s added crewmatese**
-  -  The web app contains a summary page dedicated to displaying all the crewmates the user has made so far
-  -  The summary page is sorted by creation date such that the most recently created crewmates appear at the top
-- [X] **A previously created crewmate can be updated from the list of crewmates in the summary page**
-  - Each crewmate has an edit button that will take users to an update form for the relevant crewmate
-  - Users can see the current attributes of their crewmate on the update form
-  - After editing the crewmate's attribute values using the form, the user can immediately see those changes reflected in the update form and on the summary page 
-- [X] **A previously created crewmate can be deleted from the crewmate list**
-  - Using the edit form detailed in the previous _crewmates can be updated_ feature, there is a button that allows users to delete that crewmate
-  - After deleting a crewmate, the crewmate should no longer be visible in the summary page
-  - [X] **Each crewmate has a direct, unique URL link to an info page about them**
-    - Clicking on a crewmate in the summary page navigates to a detail page for that crewmate
-    - The detail page contains extra information about the crewmate not included in the summary page
-    - Users can navigate to to the edit form from the detail page
-
-The following **optional** features are implemented:
-
-- [ ] A crewmate can be given a category upon creation which restricts their attribute value options
-  - e.g., a Dungeons and Dragons class or a development team role (project manager, product owner, etc.)
-  - User can choose a `category` option to describe their crewmate before any attributes are specified
-  - Based on the category value, users are allowed to access only a subset of the possible attributes
-- [ ] A section of the summary page, displays summary statistics about a user’s crew on their crew page
-  - e.g., the percent of members with a certain attribute 
-- [ ] The summary page displays a custom “success” metric about a user’s crew which changes the look of the crewmate list
-  - e.g., a pirate crew’s predicted success at commandeering a new galley
-
-
-The following **additional** features are implemented:
-
-
-
-## Video Walkthrough
-
-Here's a walkthrough of implemented user stories:
+GIF walkthrough:
 
 <img src='https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExZW81NWx3Y3ZlZHUyajNva3M3ZGF3d2QwZHBuMG94dHlmY2ZqNGJ1aiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/n7rCnftgWvY6X74XuW/giphy.gif' />
+Tech used: HTML, CSS, JavaScript, React, Vite, Supabase
+This project was built using React and Vite, with Supabase as the backend for storing wizard data. The app uses React Router for navigation between the create, summary, detail, and edit pages. Each wizard has a unique URL, and the summary view is sorted by creation time.
 
-<!-- Replace this with whatever GIF tool you used! -->
-GIF created with Licecap
-<!-- Recommended tools:
-[Kap](https://getkap.co/) for macOS
-[ScreenToGif](https://www.screentogif.com/) for Windows
-[peek](https://github.com/phw/peek) for Linux. -->
+I implemented full CRUD functionality where users can create new wizards, view a live-updating list, edit attributes, and delete entries. Supabase handles all data persistence, and I used local state to manage form inputs and live updates across pages.
 
-## Notes
-
-getting supa base to work with my code 
-
-## License
-
-    Copyright [yyyy] [name of copyright owner]
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-        http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
+Lessons Learned:
+One of the biggest challenges was connecting Supabase correctly with the frontend logic. It took some debugging to get the data flow working between the forms, the database, and the UI updates. Once that was set up, it was satisfying to see how real-time updates could work smoothly. I also learned how to structure a multi-page React app with detailed routing and how to manage updates across different views without full page reloads.
